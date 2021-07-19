@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 
@@ -10,9 +11,11 @@ import { EmployeeService } from './employee.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  public employees: Employee[] = [];
+  public employees: Employee[];
 
-  constructor(private employeeService: EmployeeService){}
+  constructor(private employeeService: EmployeeService){
+    this.employees = [];
+  }
 
   ngOnInit() {
     this.getEmployees();
@@ -29,9 +32,22 @@ export class AppComponent implements OnInit{
     );
   }
 
+  public onAddEmployee(addForm: NgForm): void {
+    this.employeeService.addEmployee(addForm.value).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   public onOpenModal(employee: Employee, mode: string): void{
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
+    
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');

@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
        <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-             <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Employee <span class="sr-only">(current)</span></a>
+             <a class="nav-link" (click)="onOpenModal(null!, 'add')">Add Employee <span class="sr-only">(current)</span></a>
           </li>
        </ul>
        <form class="form-inline my-2 my-lg-0">
@@ -53,7 +53,7 @@
             </button>
          </div>
          <div class="modal-body">
-            <form #addForm="ngForm" (ngSubmit)="onAddEmloyee(addForm)">
+            <form #addForm="ngForm" (ngSubmit)="onAddEmployee(addForm)">
             <div class="form-group">
                <label for="name">Name</label>
                <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
